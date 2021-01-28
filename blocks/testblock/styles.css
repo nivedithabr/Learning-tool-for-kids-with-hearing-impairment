@@ -1,0 +1,30 @@
+#snapshotholder {
+    width: 100%;
+    height: 420px;
+}
+
+
+#Capture_Holder hr {
+    clear: both;
+}
+
+#Capture_Holder #previewholder {
+    width: 50%;
+    max-width: 300px;
+    float: left;
+    overflow: hidden;
+}
+
+#Capture_Holder #previewholder canvas#render {
+    display: none;
+}
+
+#Capture_Holder canvas#canvas {
+    width: 150px;
+    height: 150px;
+    margin-left: 1rem;
+}
+
+.clearboth {
+    clear: both;
+}
