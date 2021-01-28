@@ -62,26 +62,26 @@ function upload(){
     
     if(!videofile.files.length ==0 ){
 
-        url = "https://192.168.178.20/moodle/blocks/testblock/classes/ajax.php";
-        /// send video file via ajax to ajax.php to extract audio from video
-        var formdata = new FormData();
-        formdata.append("myFile",vidfile);
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            // Do what you want here with the response here
-            var result= this.responseText;
-                if(result=="sucess"){
-                    $('#Modalsucess').modal('show')
-                }
-            }
-        };
-        xhttp.onerror = function(event) {
-            document.getElementById("myResponse").innerHTML = "Request error:" + event.target.status;
-        };
-        xhttp.open("POST", url, true);
-        xhttp.send(formdata+"&image="+capturedimage+"&name="+vidname);
-        
+        // url = "https://192.168.178.20/moodle/blocks/testblock/classes/ajax.php";
+        // /// send video file via ajax to ajax.php to extract audio from video
+        // var formdata = new FormData();
+        // formdata.append("myFile",vidfile);
+        // var xhttp = new XMLHttpRequest();
+        // xhttp.onreadystatechange = function() {
+        //     if (this.readyState == 4 && this.status == 200) {
+        //     // Do what you want here with the response here
+        //     var result= this.responseText;
+        //         if(result=="sucess"){
+        //             $('#Modalsucess').modal('show')
+        //         }
+        //     }
+        // };
+        // xhttp.onerror = function(event) {
+        //     document.getElementById("myResponse").innerHTML = "Request error:" + event.target.status;
+        // };
+        // xhttp.open("POST", url, true);
+        // xhttp.send(formdata+"&image="+capturedimage+"&name="+vidname);
+        $('#Modalsucess').modal('show')
     }
     else{
         $('#Modaldanger').modal('show')
