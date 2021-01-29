@@ -2,22 +2,25 @@
 
 include("../db/database.php");
 
-$filenum = 0;
 
-$ajaxdata = $_POST['videoUpload'];
+$ajaxdata = $_POST['mediaUpload'];
 
 $FILENAME = $ajaxdata[1];
 $IMAGE=$ajaxdata[0];
 
-$allowedExts = array("mp4","wmv","mpeg","MP4");
-$temp = explode(".", $_FILES["myFile"]["name"]);
+$allowedExts = array("mp3","wav");
+$temp = explode(".", $_FILES["audio"]["name"]);
 $extension = end($temp);
 
+
+
+$test = $_FILES["audio"]["type"]; 
+
+
 if (
-	$_FILES["myFile"]["type"] == "video/x-ms-wmv"||
-	$_FILES["myFile"]["type"] == "video/x-ms-mp4"||
-	$_FILES["myFile"]["type"] == "video/x-mpeg"||
-	$_FILES["myFile"]["type"] == "video/mp4"
+	$_FILES["audio"]["type"] == "audio/wav"||
+    $_FILES["audio"]["type"] == "audio/mp3"||
+    $_FILES["audio"]["type"] == "audio/mpeg"
 	&&
 	in_array($extension, $allowedExts)
 	)
@@ -44,14 +47,14 @@ if (
 		$audio_file_upload = "https://192.168.178.20/moodle/blocks/testblock/classes/".$audio_target_file;
 
 		
-		if(($_FILES["myFile"]["size"])<=51242880)
+		if(($_FILES["audio"]["size"])<=51242880)
 		{
 
-			$fileName = $_FILES["myFile"]["name"]; // The file name
-			$fileTmpLoc = $_FILES["myFile"]["tmp_name"]; // File in the PHP tmp folder
-			$fileType = $_FILES["myFile"]["type"]; // The type of file it is
-			$fileSize = $_FILES["myFile"]["size"]; // File size in bytes
-			$fileErrorMsg = $_FILES["myFile"]["error"]; // 0 for false... and 1 for true
+			$fileName = $_FILES["audio"]["name"]; // The file name
+			$fileTmpLoc = $_FILES["audio"]["tmp_name"]; // File in the PHP tmp folder
+			$fileType = $_FILES["audio"]["type"]; // The type of file it is
+			$fileSize = $_FILES["audio"]["size"]; // File size in bytes
+			$fileErrorMsg = $_FILES["audio"]["error"]; // 0 for false... and 1 for true
 			
 
  
@@ -61,11 +64,11 @@ if (
 				if (file_put_contents($image_target_file, $image_data) ) {
 					$output = shell_exec("ffmpeg -i $fileTmpLoc -ab 160k -ac 2 -ar 44100 -vn $audio_target_file");
 	
-					// $sql = "INSERT INTO mdl_media_animal (animal_image_path,animal_name,animal_audio_path) VALUES ('$image_file_upload','$FILENAME',$audio_file_upload')";
+					//$sql = "INSERT INTO mdl_media_animal (animal_image_path,animal_name,animal_audio_path) VALUES ('$image_file_upload','$FILENAME',$audio_file_upload')";
 				  
 	
-					// $stmt = $conn->prepare($sql);
-					echo"sucess";
+					//$stmt = $conn->prepare($sql);
+                    echo"sucess";
 					// if($stmt->execute()){
 					// 	echo "sucess";  
 					// }

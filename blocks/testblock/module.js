@@ -18,27 +18,12 @@ let url;
 let model;
 var capturedimage;
 var vidname;
-
+var image_data_upload;
+var upload_name;
 function changeVideo() {
                     
     var chosenFile = document.getElementById("myFile").files[0];
     document.getElementById("theVideo").setAttribute("src", URL.createObjectURL(chosenFile));
-    // url = "https://192.168.178.20/moodle/blocks/testblock/classes/ajax.php";
-    // /// send video file via ajax to ajax.php to extract audio from video
-    // var formdata = new FormData();
-    // formdata.append("myFile",chosenFile);
-    // var xhttp = new XMLHttpRequest();
-    // xhttp.onreadystatechange = function() {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //     // Do what you want here with the response here
-    //     document.getElementById("myResponse").innerHTML = this.responseText;
-    //     }
-    // };
-    // xhttp.onerror = function(event) {
-    //     document.getElementById("myResponse").innerHTML = "Request error:" + event.target.status;
-    // };
-    // xhttp.open("POST", url, true);
-    // xhttp.send(formdata);
   }
 
 
@@ -62,26 +47,43 @@ function upload(){
     
     if(!videofile.files.length ==0 ){
 
-        // url = "https://192.168.178.20/moodle/blocks/testblock/classes/ajax.php";
-        // /// send video file via ajax to ajax.php to extract audio from video
-        // var formdata = new FormData();
-        // formdata.append("myFile",vidfile);
-        // var xhttp = new XMLHttpRequest();
-        // xhttp.onreadystatechange = function() {
-        //     if (this.readyState == 4 && this.status == 200) {
-        //     // Do what you want here with the response here
-        //     var result= this.responseText;
-        //         if(result=="sucess"){
-        //             $('#Modalsucess').modal('show')
-        //         }
-        //     }
-        // };
-        // xhttp.onerror = function(event) {
-        //     document.getElementById("myResponse").innerHTML = "Request error:" + event.target.status;
-        // };
-        // xhttp.open("POST", url, true);
-        // xhttp.send(formdata+"&image="+capturedimage+"&name="+vidname);
-        $('#Modalsucess').modal('show')
+        var arr= [];
+        arr.push(capturedimage,vidname);
+        console.log(arr);
+
+        url = "https://192.168.178.20/moodle/blocks/testblock/classes/ajax.php";
+        /// send video file via ajax to ajax.php to extract audio from video
+        var formdata = new FormData();
+        arr.forEach((item) => formdata.append("videoUpload[]", item))
+        formdata.append("myFile",vidfile);
+
+        // verify the data
+        console.log(formdata.getAll("videoUpload[]"));
+        console.log(formdata.getAll("myFile"));
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            // Do what you want here with the response here
+            var result= this.responseText;
+            
+                if(result=="sucess"){
+                    $('#Modalsucess').modal('show');
+                } else if(result=="alert"){
+                    $('#Modaluploadexists').modal('show');
+                }
+                else if(result=="failed"){
+                    $('#Modaluploadfailed').modal('show');
+                }
+            }
+        };
+        xhttp.onerror = function(event) {
+            document.getElementById("myResponse").innerHTML = "Request error:" + event.target.status;
+        };
+        xhttp.open("POST", url, true);
+        xhttp.send(formdata);
+        // xhttp.send(formdata1);
+      
     }
     else{
         $('#Modaldanger').modal('show')
@@ -92,8 +94,47 @@ function upload(){
 function mediaUpload(){
     var imagefile = document.getElementById("image_url");
     var audiofile = document.getElementById("audio");
+    var audfile = audiofile.files[0];
+
     if(!(imagefile.files.length ==0 || audiofile.files.length ==0 ) ){
-        $('#Modalsucess2').modal('show')
+        
+        var arr_upload= [];
+        arr_upload.push(image_data_upload,upload_name);
+        console.log(arr_upload);
+
+        url = "https://192.168.178.20/moodle/blocks/testblock/classes/mediaupload.php";
+       
+        var formdata = new FormData();
+        arr_upload.forEach((item) => formdata.append("mediaUpload[]", item))
+        formdata.append("audio",audfile);
+
+        // verify the data
+        console.log(formdata.getAll("mediaUpload[]"));
+        console.log(formdata.getAll("audio"));
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            // Do what you want here with the response here
+            var result= this.responseText;
+            
+                if(result=="sucess"){
+                    $('#Modalsucess2').modal('show');
+                } else if(result=="alert"){
+                    $('#Modaluploadexists2').modal('show');
+                }
+                else if(result=="failed"){
+                    $('#Modaluploadfailed2').modal('show');
+                }
+            }
+        };
+        xhttp.onerror = function(event) {
+            document.getElementById("myResponse").innerHTML = "Request error:" + event.target.status;
+        };
+        xhttp.open("POST", url, true);
+        xhttp.send(formdata);
+
+
     }
     else{
         $('#Modaldanger2').modal('show')
@@ -118,12 +159,18 @@ function capture() {
 
 function doPrediction() {
     if( model ) {
+        //model.detect  //for cocossd
+            //model.classify //for mobilenet
         model.detect(canvas).then(predictions => {
             showPrediction(predictions);
         });
     } else {
+         //cocoSsd.load() //for cocossd
+        //mobilenet.load() // mobile net model
         cocoSsd.load().then(_model => {
             model = _model;
+            //model.detect  //for cocossd
+            //model.classify //for mobilenet
             model.detect(canvas).then(predictions => {
                 showPrediction(predictions);
             });
@@ -133,19 +180,29 @@ function doPrediction() {
 
 function showPrediction(predictions) {
 
-    document.getElementById("prediction").innerHTML = "This might be a " + predictions[0].class;
-    var toconvert = "This might be a " + predictions[0].class;
-    vidname = predictions[0].class;
-
     
+    var toconvert = "This might be a " + predictions[0].class;
+    //var predicted_name= predictions_img[0].className;  //mobilenet
+    var predicted_name= predictions_img[0].class;   //cocossd
+    var pred_name=predicted_name.toString().split(',')[0];
+    if (pred_name.match(/\s/g)){
+        var myString = pred_name.replaceAll(" ", "_").toLowerCase()
+        vidname = myString;
+    } else {
+        vidname= pred_name;
+    }
+    document.getElementById("prediction").innerHTML = "This might be a " + pred_name;
 
-    var msg = new SpeechSynthesisUtterance("This might be a " + predictions[0].class);
-    msg.lang='de-DE';
+    var msg = new SpeechSynthesisUtterance("This might be a " + pred_name);
+    // msg.lang='de-DE';  // speech language
     window.speechSynthesis.speak(msg);
 
-    document.getElementById("image_name").innerHTML = predictions[0].class;
     
 }
+
+
+/// image upload section 
+
 
 document.getElementById("image_url").onchange = function(e) {
     
@@ -160,6 +217,7 @@ document.getElementById("image_url").onchange = function(e) {
     canvas_img.height = this.height;
     var ctx = canvas_img.getContext('2d');
     ctx.drawImage(this, 0,0);
+    image_data_upload= canvas_img.toDataURL('image/png');
     document.getElementById("prediction_image").innerHTML = "Loading...";
     doPrediction_img();
 
@@ -172,13 +230,19 @@ document.getElementById("image_url").onchange = function(e) {
 
   function doPrediction_img() {
     if( model ) {
-        model.detect(canvas_img).then(predictions_img => {
+        //model.detect
+        //model.classify 
+        model.classify(canvas_img).then(predictions_img => {
             showPrediction_img(predictions_img);
         });
     } else {
-        cocoSsd.load().then(_model => {
+        //cocoSsd.load() //for cocossd
+        //mobilenet.load() // mobile net model
+        mobilenet.load().then(_model => {
             model = _model;
-            model.detect(canvas_img).then(predictions_img => {
+            //model.detect  //for cocossd
+            //model.classify //for mobilenet
+            model.classify(canvas_img).then(predictions_img => {
                 showPrediction_img(predictions_img);
             });
         });
@@ -187,10 +251,21 @@ document.getElementById("image_url").onchange = function(e) {
 
 function showPrediction_img(predictions_img) {
 
+    var predicted_name= predictions_img[0].className;  //mobilenet
+    //var predicted_name= predictions_img[0].class;   //cocossd
+    var pred_name=predicted_name.toString().split(',')[0];
+    if (pred_name.match(/\s/g)){
+        var myString = pred_name.replaceAll(" ", "_").toLowerCase()
+        upload_name = myString;
+    } else {
+        upload_name= pred_name;
+    }
+    
+    document.getElementById("prediction_image").innerHTML = "This might be a " + pred_name;
+    
 
-    document.getElementById("prediction_image").innerHTML = "This might be a " + predictions_img[0].class;
-    var msg_img = new SpeechSynthesisUtterance("This might be a " + predictions_img[0].class);
-    msg_img.lang = 'de-DE';
+    var msg_img = new SpeechSynthesisUtterance("This might be a " + pred_name);
+    //msg_img.lang = 'de-DE'; //speech language
     window.speechSynthesis.speak(msg_img);
     
 }

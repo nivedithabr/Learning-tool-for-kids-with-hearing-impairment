@@ -134,6 +134,22 @@ class block_testblock_renderer extends plugin_renderer_base {
                                                     </div>
                                                 </div>
                                                 
+                                                <div class="modal fade" id="Modaluploadexists" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <div class="alert alert-danger alert-dismissible">
+                                                            <a  class="close" data-dismiss="modal" aria-label="close">&times;</a>
+                                                            <strong>File Already Exists!!!!</strong> The Image and Audio File Exists in our database, Please choose other file.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="Modaluploadfailed" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <div class="alert alert-danger alert-dismissible">
+                                                            <a  class="close" data-dismiss="modal" aria-label="close">&times;</a>
+                                                            <strong>Upload Failed!!!!</strong> Please Upload again.
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -175,6 +191,24 @@ class block_testblock_renderer extends plugin_renderer_base {
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="modal fade" id="Modaluploadexists2" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <div class="alert alert-danger alert-dismissible">
+                                                            <a  class="close" data-dismiss="modal" aria-label="close">&times;</a>
+                                                            <strong>File Already Exists!!!!</strong> The Image and Audio File Exists in our database, Please choose other file.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="Modaluploadfailed2" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <div class="alert alert-danger alert-dismissible">
+                                                            <a  class="close" data-dismiss="modal" aria-label="close">&times;</a>
+                                                            <strong>Upload Failed!!!!</strong> Please Upload again.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -186,7 +220,7 @@ class block_testblock_renderer extends plugin_renderer_base {
                  
                         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script> 
                             
-                        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+                        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"> </script>
                         <script src="../module.js">  </script>
 
                     </body>
