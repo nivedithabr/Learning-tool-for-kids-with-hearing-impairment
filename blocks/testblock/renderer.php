@@ -330,7 +330,7 @@ class block_testblock_renderer extends plugin_renderer_base {
                     </head>
                     <body>
                         <div class=container>
-                        <div class="card" style="width: 18rem;display:inline-block">
+                        <div class="card" style="width: 40rem;display:inline-block">
                         <img src="https://192.168.178.20/moodle/blocks/testblock/classes/ai.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                         Real-time Audio Recognition Tool

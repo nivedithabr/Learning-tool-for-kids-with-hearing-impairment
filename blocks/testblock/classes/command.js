@@ -5,12 +5,9 @@ let sound;
 let soundClassifier;
 let resultP;
 
-//https://teachablemachine.withgoogle.com/models/QVtdHsAFG/    (for animal sound)
-//https://teachablemachine.withgoogle.com/models/soGlJQFWa/     (for alert sound)
 
 
-
-let soundModelURL = 'https://teachablemachine.withgoogle.com/models/soGlJQFWa/';
+let soundModelURL = 'https://teachablemachine.withgoogle.com/models/Jhn3VZSDp/';
 
 //results paragraph
 function preload() {
