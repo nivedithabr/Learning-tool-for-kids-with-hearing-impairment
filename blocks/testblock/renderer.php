@@ -23,6 +23,7 @@
  * @copyright 2015 MFreak.nl
  * @author    Luuk Verhoeven
  **/
+require_once(dirname(__FILE__) . '/../../config.php');
 defined('MOODLE_INTERNAL') || die;
 
 /**
@@ -38,7 +39,7 @@ class block_testblock_renderer extends plugin_renderer_base {
      * @throws moodle_exception
      */
     public function add_javascript_module() {
-        global $PAGE, $CFG, $USER;
+        global $PAGE, $CFG, $USER, $IP;
 
         $config = get_config('block_testblock');
 
@@ -61,7 +62,7 @@ class block_testblock_renderer extends plugin_renderer_base {
      */
     public function snapshot_tool() {
         // TODO Convert to mustache.
-        global $USER, $CFG; // Used for the profile link.
+        global $USER, $CFG,$IP; // Used for the profile link.
         
         // Add webrtc container.
         $html .= '
@@ -233,7 +234,7 @@ class block_testblock_renderer extends plugin_renderer_base {
     }
     public function memory_game() {
         // TODO Convert to mustache.
-        global $USER, $CFG; // Used for the profile link.
+        global $USER, $CFG,$IP; // Used for the profile link.
         
         // Add webrtc container.
         $html .= '
@@ -248,7 +249,7 @@ class block_testblock_renderer extends plugin_renderer_base {
                     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
                         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
                     <link rel="icon" href="img/page-icon.png">
-                    <link rel="stylesheet" href="https://192.168.178.20/moodle/blocks/testblock/classes/memgame_css/style.css">
+                    <link rel="stylesheet" href="https://'.$IP.'/moodle/blocks/testblock/classes/memgame_css/style.css">
                 </head>
                 <body>
                 
@@ -290,8 +291,8 @@ class block_testblock_renderer extends plugin_renderer_base {
                     </div>
                     </section>
                     
-                    <script src="https://192.168.178.20/moodle/blocks/testblock/classes/mem_game_js/tiles.js"></script>
-                    <script src="https://192.168.178.20/moodle/blocks/testblock/classes/mem_game_js/app.js"></script>
+                    <script src="https://'.$IP.'/moodle/blocks/testblock/classes/mem_game_js/tiles.js"></script>
+                    <script src="https://'.$IP.'/moodle/blocks/testblock/classes/mem_game_js/app.js"></script>
                     
                 
                 </body>
@@ -304,16 +305,16 @@ class block_testblock_renderer extends plugin_renderer_base {
     }
     public function audio_detection() {
         // TODO Convert to mustache.
-        global $USER, $CFG; // Used for the profile link.
+        global $USER, $CFG,$IP; // Used for the profile link.
         
         // Add webrtc container.
         $html .= '
                 <!DOCTYPE html>
                 <html>
                     <head>
-                        <script src="https://192.168.178.20/moodle/blocks/testblock/classes/p5.js"></script>
-                        <script src="https://192.168.178.20/moodle/blocks/testblock/classes/p5.dom.min.js"></script>
-                        <script src="https://192.168.178.20/moodle/blocks/testblock/classes/p5.sound.min.js"></script>
+                        <script src="https://'.$IP.'/moodle/blocks/testblock/classes/p5.js"></script>
+                        <script src="https://'.$IP.'/moodle/blocks/testblock/classes/p5.dom.min.js"></script>
+                        <script src="https://'.$IP.'/moodle/blocks/testblock/classes/p5.sound.min.js"></script>
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                     
                         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -324,21 +325,21 @@ class block_testblock_renderer extends plugin_renderer_base {
                                                             text-align: center;
                                                             }
                                                         </style>
-                        <script src="https://192.168.178.20/moodle/blocks/testblock/classes/ml5.min.js"></script>
+                        <script src="https://'.$IP.'/moodle/blocks/testblock/classes/ml5.min.js"></script>
                     
                     
                     </head>
                     <body>
                         <div class=container>
                         <div class="card" style="width: 40rem;display:inline-block">
-                        <img src="https://192.168.178.20/moodle/blocks/testblock/classes/ai.jpg" class="card-img-top" alt="...">
+                        <img src="https://'.$IP.'/moodle/blocks/testblock/classes/ai.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                         Real-time Audio Recognition Tool
                         <div id="res"></div>
                         </div>
                         </div>
                         </div>
-                        <script src="https://192.168.178.20/moodle/blocks/testblock/classes/command.js"></script>
+                        <script src="https://'.$IP.'/moodle/blocks/testblock/classes/command.js"></script>
                     
                     
                     </body>

@@ -1,7 +1,8 @@
 <?php
 
 include("../db/database.php");
-
+require_once(dirname(__FILE__) . '/../../../config.php');
+global $IP;
 $filenum = 0;
 
 $ajaxdata = $_POST['videoUpload'];
@@ -36,12 +37,12 @@ if (
 		//$extension  = pathinfo( $_FILES["fileUpload"]["name"], PATHINFO_EXTENSION ); // jpg
 		$image_extension = "png";
         $image_target_file =$image_target_dir . basename($FILENAME . "." . $image_extension);
-		$image_file_upload = "https://192.168.178.20/moodle/blocks/testblock/classes/".$image_target_file;
+		$image_file_upload = "https://'.$IP.'/moodle/blocks/testblock/classes/".$image_target_file;
 		
 		
 		$audio_extension ="mp3";
 		$audio_target_file= $audio_target_dir.basename($FILENAME. "." .$audio_extension) ;
-		$audio_file_upload = "https://192.168.178.20/moodle/blocks/testblock/classes/".$audio_target_file;
+		$audio_file_upload = "https://'.$IP.'/moodle/blocks/testblock/classes/".$audio_target_file;
 
 		
 		if(($_FILES["myFile"]["size"])<=51242880)

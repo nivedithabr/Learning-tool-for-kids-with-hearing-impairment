@@ -17,8 +17,8 @@ $CFG->dboptions = array (
   'dbsocket' => '',
   'dbcollation' => 'utf8mb4_general_ci',
 );
-
-$CFG->wwwroot   = 'https://192.168.178.20/moodle';
+$IP="192.168.178.20";
+$CFG->wwwroot   = 'https://'.$IP.'/moodle';
 $CFG->dataroot  = 'C:\\xampp\\moodledata';
 $CFG->admin     = 'admin';
 

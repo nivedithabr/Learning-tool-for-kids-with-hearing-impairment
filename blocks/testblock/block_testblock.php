@@ -21,7 +21,7 @@
  * @copyright 1999 onwards Martin Dougiamas (http://dougiamas.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+require_once(dirname(__FILE__) . '/../../config.php');
 class block_testblock extends block_base {
 
     public function init() {
@@ -34,7 +34,7 @@ class block_testblock extends block_base {
 
 
     function get_content() {
-        global $CFG, $COURSE;
+        global $CFG, $COURSE,$IP;
 
         require_once($CFG->libdir . '/formslib.php');
 
@@ -61,7 +61,7 @@ class block_testblock extends block_base {
                                     <body>
                                     
                                     <div class="card" style="width: 18rem; display:inline-block";>
-                                    <img src="https://192.168.178.20/moodle/blocks/testblock/music.png" class="card-img-top" alt="...">
+                                    <img src="https://'.$IP.'/moodle/blocks/testblock/music.png" class="card-img-top" alt="...">
                                     <div class="card-body">
                                     <div class="singlebutton">
                                         <form action="' . $CFG->wwwroot . '/blocks/testblock/view/memory_game_view.php" method="get">
@@ -76,7 +76,7 @@ class block_testblock extends block_base {
                                     </div>
     
                                     <div class="card" style="width: 18rem; display:inline-block";>
-                                    <img src="https://192.168.178.20/moodle/blocks/testblock/ai.png" class="card-img-top" alt="...">
+                                    <img src="https://'.$IP.'/moodle/blocks/testblock/ai.png" class="card-img-top" alt="...">
                                     <div class="card-body">
                                     <div class="singlebutton">
                                         <form action="' . $CFG->wwwroot . '/blocks/testblock/view/audio_detection.php" method="get">
@@ -123,7 +123,7 @@ class block_testblock extends block_base {
                                 
 
                                 <div class="card" style="width: 18rem;display:inline-block">
-                                    <img src="https://192.168.178.20/moodle/blocks/testblock/upload.jpg" class="card-img-top" alt="...">
+                                    <img src="https://'.$IP.'/moodle/blocks/testblock/upload.jpg" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <div class="singlebutton">
                                             <form action="' . $CFG->wwwroot . '/blocks/testblock/view/view.php" method="get">
@@ -138,7 +138,7 @@ class block_testblock extends block_base {
                                 </div>
                                 
                                 <div class="card" style="width: 18rem; display:inline-block";>
-                                <img src="https://192.168.178.20/moodle/blocks/testblock/music.png" class="card-img-top" alt="...">
+                                <img src="https://'.$IP.'/moodle/blocks/testblock/music.png" class="card-img-top" alt="...">
                                 <div class="card-body">
                                 <div class="singlebutton">
                                     <form action="' . $CFG->wwwroot . '/blocks/testblock/view/memory_game_view.php" method="get">
@@ -153,7 +153,7 @@ class block_testblock extends block_base {
                                 </div>
 
                                 <div class="card" style="width: 18rem; display:inline-block";>
-                                <img src="https://192.168.178.20/moodle/blocks/testblock/ai.png" class="card-img-top" alt="...">
+                                <img src="https://'.$IP.'/moodle/blocks/testblock/ai.png" class="card-img-top" alt="...">
                                 <div class="card-body">
                                 <div class="singlebutton">
                                     <form action="' . $CFG->wwwroot . '/blocks/testblock/view/audio_detection.php" method="get">

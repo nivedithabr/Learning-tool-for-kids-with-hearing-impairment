@@ -20,6 +20,7 @@ var capturedimage;
 var vidname;
 var image_data_upload;
 var upload_name;
+var IP = "192.168.178.20";
 function changeVideo() {
                     
     var chosenFile = document.getElementById("myFile").files[0];
@@ -51,7 +52,7 @@ function upload(){
         arr.push(capturedimage,vidname);
         console.log(arr);
 
-        url = "https://192.168.178.20/moodle/blocks/testblock/classes/ajax.php";
+        url = "https://"+IP+"/moodle/blocks/testblock/classes/ajax.php";
         /// send video file via ajax to ajax.php to extract audio from video
         var formdata = new FormData();
         arr.forEach((item) => formdata.append("videoUpload[]", item))
@@ -102,7 +103,7 @@ function mediaUpload(){
         arr_upload.push(image_data_upload,upload_name);
         console.log(arr_upload);
 
-        url = "https://192.168.178.20/moodle/blocks/testblock/classes/mediaupload.php";
+        url = "https://"+IP+"/moodle/blocks/testblock/classes/mediaupload.php";
        
         var formdata = new FormData();
         arr_upload.forEach((item) => formdata.append("mediaUpload[]", item))
