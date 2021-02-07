@@ -1,0 +1,138 @@
+/* define any style rules you need here */
+#tiles {
+    padding-bottom: 50px;
+    width: 600px;
+    height: 700px;
+    margin: 0 auto;
+}
+
+.tile-div {
+    padding: 0;    
+    text-align: center;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: inherit;
+    flex-direction: column;
+    background: #d5dee2 url('https://192.168.178.20/moodle/blocks/testblock/classes/image_dir/backgrnd.jpg') bottom;
+    background-size: cover;
+    font-family: 'Coda', cursive;
+    color:whitesmoke;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .hidden {
+    display: none !important;
+  }
+
+  #pre {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+  
+  #themes {
+    margin: auto;
+    padding: 20px;
+    width: 250px;
+    background: white;
+    color: #6186aa;
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+  
+  #themes p {
+    margin-top: 10px;
+    padding: 5px 20px;
+    border: solid 1px;
+    background: white;
+    color: #6186aa;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #themes p:hover {
+    background: #6186aa;
+  /*   background-image: linear-gradient(to top left, #9b59b6, #1abc9c); */
+    background-size: 250%;
+    color: white;
+  }
+  
+  /* POST modal window */
+  #post {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+  }
+  
+  #post > div {
+    width: 300px;
+    padding: 20px 0 40px;
+    background: white;
+    color: #6186aa;
+  }
+  
+  #post p:first-child, 
+  #post #final {
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: auto;
+    padding: 10px 20px;
+  }
+  
+  #post #again {
+    color: #6186aa;
+    text-decoration: none;
+    margin: auto;
+    padding: 10px 20px;
+    width: 160px;
+    border: solid 1px;
+  }
+  
+  #post #again:hover {
+    background: #6186aa;
+  /*   background-image: linear-gradient(to top left, #9b59b6, #1abc9c); */
+    background-size: 250%;
+    color: white;
+    cursor: pointer;
+  }
+  
+  
+.zoom {
+  padding: 45px;
+  padding-top: 10px;
+
+
+  transition: transform .2s;
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.5); 
+}

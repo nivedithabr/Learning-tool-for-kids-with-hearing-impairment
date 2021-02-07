@@ -136,6 +136,23 @@ class block_testblock extends block_base {
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <div class="card" style="width: 18rem; display:inline-block";>
+                                <img src="https://'.$IP.'/moodle/blocks/testblock/training.png" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                <div class="singlebutton">
+                                    <form action="' . $CFG->wwwroot . '/blocks/testblock/view/Training.php" method="get">
+                                    <div>
+                                        <input type="hidden" name="blockid" value="' . $this->instance->id . '"/>
+                                        <input type="hidden" name="courseid" value="' . $COURSE->id . '"/>
+                                        <input class="singlebutton btn btn-primary" type="submit" value="         Audio Training          "/>
+                                    </div>
+                                    </form>
+                                </div>
+                                </div>
+                                </div>
+
                                 
                                 <div class="card" style="width: 18rem; display:inline-block";>
                                 <img src="https://'.$IP.'/moodle/blocks/testblock/music.png" class="card-img-top" alt="...">

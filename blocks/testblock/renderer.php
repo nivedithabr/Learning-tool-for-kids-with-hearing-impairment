@@ -222,6 +222,7 @@ class block_testblock_renderer extends plugin_renderer_base {
                         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script> 
                             
                         <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"> </script>
+                        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
                         <script src="../module.js">  </script>
 
                     </body>
@@ -257,8 +258,7 @@ class block_testblock_renderer extends plugin_renderer_base {
                         <div id="themes">
                             Chose your theme !
                             <p id="Animals" class="themes" title="Animals">Animals</p>
-                            <p id="Alert" class="themes" title="Alert">Alert</p>
-                            <p id="Birds" class="themes" title="Birds">Birds</p>
+                            <p id="Others" class="themes" title="Others">Others</p>
                         </div>
                     </section>
                     <!-- you can use these elements to display the game statistics
@@ -293,6 +293,72 @@ class block_testblock_renderer extends plugin_renderer_base {
                     
                     <script src="https://'.$IP.'/moodle/blocks/testblock/classes/mem_game_js/tiles.js"></script>
                     <script src="https://'.$IP.'/moodle/blocks/testblock/classes/mem_game_js/app.js"></script>
+                    
+                
+                </body>
+                </html>
+
+                             
+             ';
+             
+        return $html;
+    }
+    public function training() {
+        // TODO Convert to mustache.
+        global $USER, $CFG,$IP; // Used for the profile link.
+        
+        // Add webrtc container.
+        $html .= '
+        
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                    <title>Memory</title>
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+                        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                    <link rel="icon" href="img/page-icon.png">
+                    <link rel="stylesheet" href="https://'.$IP.'/moodle/blocks/testblock/classes/Training_css/style.css">
+                </head>
+                <body>
+                
+                    <section id="pre" class="">
+                        <div id="themes">
+                            Chose your theme !
+                            <p id="Animals" class="themes" title="Animals">Animals</p>
+                            <p id="Others" class="themes" title="Others">Others</p>
+                        </div>
+                    </section>
+                    <!-- you can use these elements to display the game statistics
+                    or you can use some other set of HTML elements  -->
+                    <div class="container">
+                        <div class="row" id="stats">
+                            <p class="col">time: <span id="time"></span></p>
+                            <div class="col-2" id="restart"> 
+                                <i class="fa fa-repeat"></i>     Shuffle
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- you can use this element as a container for all of your tile buttons/images -->
+                    <div class="container">
+                        <div class="row" id="tiles"></div>
+                        
+                    </div>
+                    <section id="post" class="hidden">
+                    <div>
+                        <p>BRAVO !</p>
+                       
+                        <p>
+                        <a id="again">Play Again !</a>
+                        </p>
+                    </div>
+                    </section>
+                    
+                    <script src="https://'.$IP.'/moodle/blocks/testblock/classes/training_js/tiles.js"></script>
+                    <script src="https://'.$IP.'/moodle/blocks/testblock/classes/training_js/app.js"></script>
                     
                 
                 </body>

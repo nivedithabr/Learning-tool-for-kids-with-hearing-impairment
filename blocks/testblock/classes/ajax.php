@@ -9,7 +9,7 @@ $ajaxdata = $_POST['videoUpload'];
 
 $FILENAME = $ajaxdata[1];
 $IMAGE=$ajaxdata[0];
-
+$animal= array("bird","cat","dog","horse","sheep","cow","elephant","bear","giraffe","zebra");
 $allowedExts = array("mp4","wmv","mpeg","MP4");
 $temp = explode(".", $_FILES["myFile"]["name"]);
 $extension = end($temp);
@@ -24,9 +24,20 @@ if (
 	)
   	{
 
+		if (in_array($FILENAME, $animal)) 
+		{ 
+			$image_target_dir = "image_dir/";
+			$audio_target_dir = "audio_dir/";
+			// $sql = "INSERT INTO mdl_media_animal (animal_image_path,animal_name,animal_audio_path) VALUES ('$image_file_upload','$FILENAME',$audio_file_upload')";
+		} 
+		else
+		{ 
+			$image_target_dir = "other_image_dir/";
+			$audio_target_dir = "other_audio_dir/";
+			// $sql = "INSERT INTO mdl_media_others (others_image_path,others_name,others_audio_path) VALUES ('$image_file_upload','$FILENAME',$audio_file_upload')";
+		} 
 
-		$image_target_dir = "image_dir/";
-		$audio_target_dir = "audio_dir/";
+		
         // Get file path
         
 		$img = $IMAGE;
@@ -62,7 +73,7 @@ if (
 				if (file_put_contents($image_target_file, $image_data) ) {
 					$output = shell_exec("ffmpeg -i $fileTmpLoc -ab 160k -ac 2 -ar 44100 -vn $audio_target_file");
 	
-					// $sql = "INSERT INTO mdl_media_animal (animal_image_path,animal_name,animal_audio_path) VALUES ('$image_file_upload','$FILENAME',$audio_file_upload')";
+					
 				  
 	
 					// $stmt = $conn->prepare($sql);

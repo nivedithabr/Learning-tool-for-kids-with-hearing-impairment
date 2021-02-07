@@ -1,6 +1,6 @@
 "use strict";
 
-const TILE_NUM = 6;
+const TILE_NUM = 4;
 var TILES = {};
 var move = 1;
 
@@ -8,7 +8,7 @@ var preElt = document.querySelector("#pre"),
     themesElt = document.querySelector("#themes"),
     restart= document.querySelector("#restart"),
     postElt = document.querySelector("#post"),
-    finalElt = document.querySelector("#final"),
+   // finalElt = document.querySelector("#final"),
     againElt = document.querySelector("#again");
 
 
@@ -59,24 +59,14 @@ function cloneObject(obj) {
 }
 
 function newGame() {
-    //TODO: add code to implement the game
 
-    clock.startTime = Date.now();
-    clock.timer = window.setInterval(function(){
-        renderClock(clock);
-    }, 1000);
-
-    stats.matches = 0;
-    stats.missed = 0;
     stats.remaining = TILE_NUM;
-    renderStats(stats);
+    // renderStats(stats);
 
-    let tileArray = shuffle(TILES).slice(0, TILE_NUM).map(cloneObject);
-    let pairArray = shuffle(tileArray.map(cloneObject));
-    tileArray = tileArray.concat(pairArray);
+    let tileArray = shuffle(TILES).slice(0, TILE_NUM);
     let tiles = document.querySelector("#tiles");
     tiles.textContent = "";
-    for (let i = 0; i < tileArray.length; i++) {
+    for (let i = 0; i < TILE_NUM; i++) {
         tiles.appendChild(renderTile(tileArray[i]));
     }
 }
@@ -84,17 +74,18 @@ function newGame() {
 function renderTile(tile) {
     let tileDiv = document.createElement("div");
     tileDiv.classList.add("tile-div");
-    tileDiv.classList.add("col-3");
+    tileDiv.classList.add("col-5");
 
     let button = document.createElement("button");
     button.classList.add("btn");
     button.setAttribute("aria-label", "flip");
     
     let img = document.createElement("img");
-    img.classList.add("img-fluid");
-    img.src = TILEBACK;
-    img.alt = TILEBACKALT;
-
+    img.classList.add("zoom");
+    img.src = tile.url;
+    img.alt = tile.alt;
+    
+    tileDiv.textContent = tile.alt;
     var audi = document.createElement("audio");
          
     
@@ -104,42 +95,23 @@ function renderTile(tile) {
 
     button.addEventListener("click", function(evt){
         evt.preventDefault();
-        if (img.alt === TILEBACKALT) {
+        if (img.alt === img.alt) {
             img.src = tile.url;
             img.alt = tile.alt;
+            var msg_img = new SpeechSynthesisUtterance(tile.alt);
+    //msg_img.lang = 'de-DE'; //speech language
+            window.speechSynthesis.speak(msg_img);
             audi.src = tile.audio;
             audi.play();
-            if (lastTile.img == undefined) {
-                lastTile.img = tile.url;
-                lastTile.element = img;
-            } else {
-                if (lastTile.img == tile.url) {
-                    stats.matches++;
-                    stats.remaining--;
-                    lastTile.img = undefined;
-                    lastTile.element = undefined;
-                    checkGameEnd(stats);
-                } else {
-                    stats.missed++;
-                    setTimeout(function() {
-                        img.src = TILEBACK;
-                        img.alt = TILEBACKALT;
-                        lastTile.element.src = TILEBACK;
-                        lastTile.element.alt = TILEBACKALT;
-                        lastTile.img = undefined;
-                        lastTile.element = undefined;
-                    }, 500);
-                }
-                renderStats(stats);
-            }
+            
+            
         }
     });
     return tileDiv;
 }
 
 function renderStats(stats) {
-    document.querySelector("#matches").textContent = stats.matches;
-    document.querySelector("#missedMatches").textContent = stats.missed;
+
     document.querySelector("#remaining").textContent = stats.remaining;
 }
 
@@ -148,17 +120,6 @@ function renderClock(clock) {
      minutes = Math.floor(time / 60000);
      seconds = Math.floor((time % 60000) / 1000);
     document.querySelector("#time").textContent = "" + minutes + " min " + seconds + " sec";
-}
-
-function checkGameEnd(stats) {
-    console.log("checking game end");
-    if (stats.matches == TILE_NUM && stats.remaining == 0) {
-        let time = clock.timer;
-        clearInterval(clock.timer);
-        finalElt.innerHTML = "You missed " + stats.missed + " <br> Time Taken " + "" + minutes + " min " + seconds + " sec";
-        postElt.classList.remove("hidden");
-        
-    }
 }
 
 againElt.addEventListener("click", function(){
@@ -185,6 +146,10 @@ themesElt.addEventListener("click", function(e) {
       case "Animals":
         
         TILES=Animals;
+        clock.startTime = Date.now();
+        clock.timer = window.setInterval(function(){
+            renderClock(clock);
+        }, 1000);
         newGame();
         break;
     }
@@ -192,16 +157,11 @@ themesElt.addEventListener("click", function(e) {
         case "Others":
           
           TILES=others;
+          clock.startTime = Date.now();
+          clock.timer = window.setInterval(function(){
+            renderClock(clock);
+          }, 1000);
           newGame();
           break;
       }
 }
-//start a new game when the page loads
-
-
-// document.addEventListener('keydown', function(evt) {
-//     evt.preventDefault();
-//     stats.matches = TILE_NUM;
-//     stats.remaining = 0;
-//     checkGameEnd(stats);
-// });

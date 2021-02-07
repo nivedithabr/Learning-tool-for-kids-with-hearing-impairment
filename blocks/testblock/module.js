@@ -183,8 +183,13 @@ function showPrediction(predictions) {
 
     
     var toconvert = "This might be a " + predictions[0].class;
-    //var predicted_name= predictions_img[0].className;  //mobilenet
-    var predicted_name= predictions_img[0].class;   //cocossd
+    //var predicted_name= predictions[0].className;  //mobilenet
+    var predicted_name;
+    if(predictions.length == 0){
+        predicted_name = "undefined";
+    } else {
+        predicted_name= predictions[0].class; //cocossd
+    }
     var pred_name=predicted_name.toString().split(',')[0];
     if (pred_name.match(/\s/g)){
         var myString = pred_name.replaceAll(" ", "_").toLowerCase()
@@ -233,17 +238,17 @@ document.getElementById("image_url").onchange = function(e) {
     if( model ) {
         //model.detect
         //model.classify 
-        model.classify(canvas_img).then(predictions_img => {
+        model.detect(canvas_img).then(predictions_img => {
             showPrediction_img(predictions_img);
         });
     } else {
         //cocoSsd.load() //for cocossd
         //mobilenet.load() // mobile net model
-        mobilenet.load().then(_model => {
+        cocoSsd.load().then(_model => {
             model = _model;
             //model.detect  //for cocossd
             //model.classify //for mobilenet
-            model.classify(canvas_img).then(predictions_img => {
+            model.detect(canvas_img).then(predictions_img => {
                 showPrediction_img(predictions_img);
             });
         });
@@ -252,8 +257,14 @@ document.getElementById("image_url").onchange = function(e) {
 
 function showPrediction_img(predictions_img) {
 
-    var predicted_name= predictions_img[0].className;  //mobilenet
-    //var predicted_name= predictions_img[0].class;   //cocossd
+    //var predicted_name= predictions_img[0].className;  //mobilenet
+       //cocossd
+    var predicted_name; 
+    if(predictions_img.length == 0){
+        predicted_name = "undefined";
+    } else {
+        predicted_name= predictions_img[0].class; //cocossd
+    }
     var pred_name=predicted_name.toString().split(',')[0];
     if (pred_name.match(/\s/g)){
         var myString = pred_name.replaceAll(" ", "_").toLowerCase()
