@@ -102,7 +102,8 @@ function renderTile(tile) {
     //msg_img.lang = 'de-DE'; //speech language
             window.speechSynthesis.speak(msg_img);
             audi.src = tile.audio;
-            audi.play();
+            setTimeout(function(){audi.play()},1500);
+            //audi.play();
             
             
         }
