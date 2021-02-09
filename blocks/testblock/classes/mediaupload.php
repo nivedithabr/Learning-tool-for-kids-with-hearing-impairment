@@ -32,13 +32,13 @@ if (
 		{ 
 			$image_target_dir = "image_dir/";
 			$audio_target_dir = "audio_dir/";
-			// $sql = "INSERT INTO mdl_media_animal (animal_image_path,animal_name,animal_audio_path) VALUES ('$image_file_upload','$FILENAME',$audio_file_upload')";
+			$sql = "INSERT INTO mdl_media_animal (animal_image_path,animal_name,animal_audio_path) VALUES ('$image_file_upload','$FILENAME',$audio_file_upload')";
 		} 
 		else
 		{ 
 			$image_target_dir = "other_image_dir/";
 			$audio_target_dir = "other_audio_dir/";
-			// $sql = "INSERT INTO mdl_media_others (others_image_path,others_name,others_audio_path) VALUES ('$image_file_upload','$FILENAME',$audio_file_upload')";
+			$sql = "INSERT INTO mdl_media_others (others_image_path,others_name,others_audio_path) VALUES ('$image_file_upload','$FILENAME',$audio_file_upload')";
 		} 
         // Get file path
         
@@ -76,11 +76,11 @@ if (
 					$output = shell_exec("ffmpeg -i $fileTmpLoc -ab 160k -ac 2 -ar 44100 -vn $audio_target_file");
 	
 				
-					//$stmt = $conn->prepare($sql);
-                    echo"sucess";
-					// if($stmt->execute()){
-					// 	echo "sucess";  
-					// }
+					$stmt = $conn->prepare($sql);
+                    // echo"sucess";
+					if($stmt->execute()){
+						echo "sucess";  
+					}
 
 				}else {
 					echo "failed";
