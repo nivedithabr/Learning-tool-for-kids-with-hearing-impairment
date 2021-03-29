@@ -109,6 +109,7 @@ function renderTile(tile) {
             img.alt = tile.alt;
             audi.src = tile.audio;
             audi.play();
+            setTimeout(function(){console.log('wait')},1500);
             if (lastTile.img == undefined) {
                 lastTile.img = tile.url;
                 lastTile.element = img;
@@ -121,6 +122,7 @@ function renderTile(tile) {
                     checkGameEnd(stats);
                 } else {
                     stats.missed++;
+                    setTimeout(function(){console.log('wait')},1500);
                     setTimeout(function() {
                         img.src = TILEBACK;
                         img.alt = TILEBACKALT;

@@ -12,7 +12,7 @@ while($row=mysqli_fetch_array($res)){
 	$results_array[]=$row['others_image_path'];
 	$results_array[] = $row['others_name'];
 	$results_array[] = $row['others_audio_path'];
-
+	$results_array[] = $row['others_gif_path'];
 }
 
 

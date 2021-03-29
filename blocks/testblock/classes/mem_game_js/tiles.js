@@ -48,11 +48,12 @@ xhttp1.onreadystatechange = function() {
     resultin1 = JSON.parse(this.responseText);
     var result1 = new Array(resultin1.length - 1);
     var count1 = 0;
-    for (let i = 0; i < result1.length; i=i+3) {
+    for (let i = 0; i < result1.length; i=i+4) {
         result1[count1] = {
             url: resultin1[i],
             alt: resultin1[i + 1],
-            audio: resultin1[i + 2]
+            audio: resultin1[i + 2],
+            gif: resultin1[i + 3]
         };  
         others.push(result1[count1]);
         ++count1; 
