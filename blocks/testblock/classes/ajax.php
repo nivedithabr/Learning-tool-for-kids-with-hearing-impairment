@@ -1,5 +1,5 @@
 <?php
-
+// ajax file to upload video and extract audio from video
 include("../db/database.php");
 require_once(dirname(__FILE__) . '/../../../config.php');
 global $IP;
@@ -71,6 +71,7 @@ if (
 				echo "alert";
 			} else {
 				if (file_put_contents($image_target_file, $image_data) ) {
+					// ffmpeg to extract audio from video
 					$output = shell_exec("ffmpeg -i $fileTmpLoc -ab 160k -ac 2 -ar 44100 -vn $audio_target_file");
 	
 					

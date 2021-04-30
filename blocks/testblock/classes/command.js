@@ -1,3 +1,4 @@
+// audio detection related code
 
 let mic;
 let vol;
@@ -6,7 +7,12 @@ let soundClassifier;
 let resultP;
 
 
-
+/**
+ * audio detection model
+ * train the model in teachable machine https://teachablemachine.withgoogle.com/
+ * upload the model to cloud 
+ * copy and paste that link in soundModelURL
+ *  */ 
 let soundModelURL = 'https://teachablemachine.withgoogle.com/models/Jhn3VZSDp/';
 
 //results paragraph
@@ -36,6 +42,7 @@ function gotCommand(error, results){
   document.getElementById("res").innerHTML = (`${results[0].label} : ${results[0].confidence}`);
   var rt=results[0].confidence;
   var result = parseFloat(rt.toFixed(2))
+  // set the confidence accuracy to higher
   if(result >= 0.98){
     if(!((results[0].label)=="Background Noise") && !((results[0].label)=="Sparrow")){
       var msg = new SpeechSynthesisUtterance(results[0].label);

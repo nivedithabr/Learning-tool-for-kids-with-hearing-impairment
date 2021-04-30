@@ -2,11 +2,14 @@ var IP = "192.168.178.20";
 const TILEBACK = "https://"+IP+"/moodle/blocks/testblock/classes/image_dir/tileback.jpg";
 const TILEBACKALT = "tile back image";
 
-
+// to fetch image and audio from the database
 
 const Animals= new Array();
 var xhttp = new XMLHttpRequest();
 var url ="https://"+IP+"/moodle/blocks/testblock/classes/memgame.php";
+//
+
+//Post request to get animal category
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
     // Do what you want here with the response here
@@ -37,6 +40,7 @@ xhttp.open("POST",url, true);
 xhttp.send();
 
 
+// post request to get others category 
 const others= new Array();
 var xhttp1 = new XMLHttpRequest();
 var url1 ="https://"+IP+"/moodle/blocks/testblock/classes/others.php";

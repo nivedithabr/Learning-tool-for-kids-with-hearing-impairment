@@ -1,18 +1,9 @@
-// const ffmpeg = require("fluent-ffmpeg");
-
-
-
-// const fs = require("fs");
-
-// ffmpeg.setFfmpegPath("D:/Tools/ffmpeg-20181217-f22fcd4-win64-static/bin/ffmpeg.exe");
-
-// ffmpeg.setFfprobePath("D:/Tools/ffmpeg-20181217-f22fcd4-win64-static/bin");
-
-// console.log(ffmpeg);
-
-// var inputElement =  document.getElementById("myFile");
-
-// document.getElementById("demo").innerHTML = inputElement;
+/**
+ * This file contains function on video playback
+ * media upload
+ * object detection
+ * capture image from video
+ */
 
 let url;
 let model;
@@ -21,6 +12,8 @@ var vidname;
 var image_data_upload;
 var upload_name;
 var IP = "192.168.178.20";
+
+// video play back
 function changeVideo() {
                     
     var chosenFile = document.getElementById("myFile").files[0];
@@ -39,7 +32,7 @@ function changeVideo() {
   document.getElementById("audio").addEventListener("change", changeAudio);
 
   
-
+// upload video file
 function upload(){
     var videofile = document.getElementById("myFile");
     var vidfile = videofile.files[0];
@@ -92,6 +85,7 @@ function upload(){
     
 }  
 
+// upload image and audio
 function mediaUpload(){
     var imagefile = document.getElementById("image_url");
     var audiofile = document.getElementById("audio");
@@ -143,6 +137,7 @@ function mediaUpload(){
     
 } 
 
+// capture image from video file
 function capture() {
     
     var canvas = document.getElementById("canvas");     
@@ -156,7 +151,7 @@ function capture() {
         
 }
 
-//// Object detection 
+//// Object detection video upload
 
 function doPrediction() {
     if( model ) {
@@ -179,6 +174,7 @@ function doPrediction() {
     }
 }
 
+// show object detection predictions on UI
 function showPrediction(predictions) {
 
     
@@ -207,8 +203,7 @@ function showPrediction(predictions) {
 }
 
 
-/// image upload section 
-
+/// object detection in image upload section 
 
 document.getElementById("image_url").onchange = function(e) {
     

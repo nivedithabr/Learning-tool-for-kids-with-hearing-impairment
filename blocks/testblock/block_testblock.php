@@ -21,6 +21,11 @@
  * @copyright 1999 onwards Martin Dougiamas (http://dougiamas.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+ /**
+  * this file helps to create a block
+  */
+  
 require_once(dirname(__FILE__) . '/../../config.php');
 class block_testblock extends block_base {
 
@@ -43,6 +48,7 @@ class block_testblock extends block_base {
         }
         $systemcontext = context_system::instance();
 
+        // to check if not admin, and make few blocks visible only to student and others
         if (!user_has_role_assignment($userid, 5)) {
             
             $this->content = new stdClass;
@@ -116,7 +122,7 @@ class block_testblock extends block_base {
         }
 
 
-
+        // make all blocks visible to admin/teacher
         if (is_siteadmin())
         {
         // show all

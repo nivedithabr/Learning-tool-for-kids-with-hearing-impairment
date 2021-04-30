@@ -1,5 +1,5 @@
 <?php
-
+// this file contains sql query to upload media
 $log_directory = './img';
 
 $results_array = array();

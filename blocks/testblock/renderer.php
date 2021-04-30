@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die;
 
 /**
  * Class block_testblock_renderer
+ * This file helps to create html page for each blocks
  */
 class block_testblock_renderer extends plugin_renderer_base {
 
@@ -60,6 +61,7 @@ class block_testblock_renderer extends plugin_renderer_base {
      * @return string
      * @throws coding_exception
      */
+    // for upload section
     public function snapshot_tool() {
         // TODO Convert to mustache.
         global $USER, $CFG,$IP; // Used for the profile link.
@@ -233,6 +235,7 @@ class block_testblock_renderer extends plugin_renderer_base {
              
         return $html;
     }
+    // for memory game
     public function memory_game() {
         // TODO Convert to mustache.
         global $USER, $CFG,$IP; // Used for the profile link.
@@ -303,6 +306,7 @@ class block_testblock_renderer extends plugin_renderer_base {
              
         return $html;
     }
+    // for training section
     public function training() {
         // TODO Convert to mustache.
         global $USER, $CFG,$IP; // Used for the profile link.
@@ -369,6 +373,7 @@ class block_testblock_renderer extends plugin_renderer_base {
              
         return $html;
     }
+    // for audio detection
     public function audio_detection() {
         // TODO Convert to mustache.
         global $USER, $CFG,$IP; // Used for the profile link.

@@ -1,5 +1,7 @@
 <?php
 
+// this file contains upload function 
+// checks if the file exists in server
 include("../db/database.php");
 require_once(dirname(__FILE__) . '/../../../config.php');
 global $IP;
@@ -8,6 +10,7 @@ $ajaxdata = $_POST['mediaUpload'];
 
 $FILENAME = $ajaxdata[1];
 $IMAGE=$ajaxdata[0];
+// an array to check which category the media belongs too
 $animal= array("bird","cat","dog","horse","sheep","cow","elephant","bear","giraffe","zebra");
 $allowedExts = array("mp3","wav");
 $temp = explode(".", $_FILES["audio"]["name"]);
@@ -27,7 +30,8 @@ if (
 	)
   	{
 
-
+		// if the name detected by object detection is present in the animal array
+		// then initialize target path to animal database or to others
 		if (in_array($FILENAME, $animal)) 
 		{ 
 			$image_target_dir = "image_dir/";
@@ -43,6 +47,7 @@ if (
         // Get file path
         
 		$img = $IMAGE;
+		// decode base64 image
 		$img = str_replace('data:image/png;base64,', '', $img);
 		$img = str_replace(' ', '+', $img);
         $image_data = base64_decode($img);
@@ -57,7 +62,7 @@ if (
 		$audio_target_file= $audio_target_dir.basename($FILENAME. "." .$audio_extension) ;
 		$audio_file_upload = "https://'.$IP.'/moodle/blocks/testblock/classes/".$audio_target_file;
 
-		
+		// file size limit
 		if(($_FILES["audio"]["size"])<=51242880)
 		{
 
@@ -68,11 +73,13 @@ if (
 			$fileErrorMsg = $_FILES["audio"]["error"]; // 0 for false... and 1 for true
 			
 
- 
+			// if file exists
 			if (file_exists($audio_target_file) || file_exists($image_target_file)) {
 				echo "alert";
 			} else {
+				// write image file
 				if (file_put_contents($image_target_file, $image_data) ) {
+					// ffmpeg to write audio file
 					$output = shell_exec("ffmpeg -i $fileTmpLoc -ab 160k -ac 2 -ar 44100 -vn $audio_target_file");
 	
 				

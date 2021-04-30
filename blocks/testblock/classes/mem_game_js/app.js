@@ -1,3 +1,7 @@
+/**
+ * this file contains logic behind memory game
+ */
+
 "use strict";
 
 const TILE_NUM = 6;
@@ -59,7 +63,6 @@ function cloneObject(obj) {
 }
 
 function newGame() {
-    //TODO: add code to implement the game
 
     clock.startTime = Date.now();
     clock.timer = window.setInterval(function(){

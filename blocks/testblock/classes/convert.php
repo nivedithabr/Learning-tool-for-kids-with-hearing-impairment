@@ -1,5 +1,5 @@
 <?php
-
+// file is under development for language translation
 use Google\Cloud\Translate\TranslateClient;
 
 /** Uncomment and populate these variables in your code */
