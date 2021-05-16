@@ -28,13 +28,11 @@ if (
 		{ 
 			$image_target_dir = "image_dir/";
 			$audio_target_dir = "audio_dir/";
-			$sql = "INSERT INTO mdl_media_animal (animal_image_path,animal_name,animal_audio_path) VALUES ('$image_file_upload','$FILENAME',$audio_file_upload')";
 		} 
 		else
 		{ 
 			$image_target_dir = "other_image_dir/";
 			$audio_target_dir = "other_audio_dir/";
-			$sql = "INSERT INTO mdl_media_others (others_image_path,others_name,others_audio_path) VALUES ('$image_file_upload','$FILENAME',$audio_file_upload')";
 		} 
 
 		
@@ -48,12 +46,12 @@ if (
 		//$extension  = pathinfo( $_FILES["fileUpload"]["name"], PATHINFO_EXTENSION ); // jpg
 		$image_extension = "png";
         $image_target_file =$image_target_dir . basename($FILENAME . "." . $image_extension);
-		$image_file_upload = "https://'.$IP.'/moodle/blocks/testblock/classes/".$image_target_file;
+		$image_file_upload = "https://$IP/moodle/blocks/testblock/classes/".$image_target_file;
 		
 		
 		$audio_extension ="mp3";
 		$audio_target_file= $audio_target_dir.basename($FILENAME. "." .$audio_extension) ;
-		$audio_file_upload = "https://'.$IP.'/moodle/blocks/testblock/classes/".$audio_target_file;
+		$audio_file_upload = "https://$IP/moodle/blocks/testblock/classes/".$audio_target_file;
 
 		
 		if(($_FILES["myFile"]["size"])<=51242880)
@@ -65,6 +63,12 @@ if (
 			$fileSize = $_FILES["myFile"]["size"]; // File size in bytes
 			$fileErrorMsg = $_FILES["myFile"]["error"]; // 0 for false... and 1 for true
 			
+			if (in_array($FILENAME, $animal)) 
+			{ 
+				$sql = "INSERT INTO mdl_media_animal (animal_image_path,animal_name,animal_audio_path) VALUES ('$image_file_upload','$FILENAME','$audio_file_upload')";
+			} else {
+				$sql = "INSERT INTO mdl_media_others (others_image_path,others_name,others_audio_path) VALUES ('$image_file_upload','$FILENAME','$audio_file_upload')";
+			}
 
  
 			if (file_exists($audio_target_file) || file_exists($image_target_file)) {
@@ -74,13 +78,21 @@ if (
 					// ffmpeg to extract audio from video
 					$output = shell_exec("ffmpeg -i $fileTmpLoc -ab 160k -ac 2 -ar 44100 -vn $audio_target_file");
 	
-					
-				  
-	
-					$stmt = $conn->prepare($sql);
+					// $stmt = $conn->prepare($sql);
+					$db = mysqli_connect("localhost", "root", "", "moodle"); 
+					// echo $sql;
+					if (!$db) {
+						echo "nodb";
+						die("Connection failed: " . mysqli_connect_error());
+					}
 					// echo"sucess";
-					if($stmt->execute()){
+					if(mysqli_query($db, $sql)){
+					// if($stmt->execute()){
 						echo "sucess";  
+					}
+					else {
+						// echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						echo "failed";
 					}
 
 				}else {

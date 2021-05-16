@@ -96,7 +96,7 @@ function renderTile(tile) {
     button.addEventListener("click", function(evt){
         evt.preventDefault();
         if (img.alt === img.alt) {
-            img.src = tile.gif;
+            img.src = tile.url;
             img.alt = tile.alt;
             var msg_img = new SpeechSynthesisUtterance(tile.alt);
     //msg_img.lang = 'de-DE'; //speech language
